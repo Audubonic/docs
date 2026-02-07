@@ -103,6 +103,9 @@
      "vscode"
    ]
   },
+  "layout": {
+    "toc": false
+  },
   "metadata": {
     "og:site_name": "Milo Developer Docs",
     "og:title": "Milo Developer Docs - Milo Developer Documentation",
