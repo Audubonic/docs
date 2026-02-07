@@ -15,7 +15,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "groups": [
           {
             "group": "Getting started",
@@ -72,15 +72,7 @@
         ]
       }
     ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://runmilo.io",
-          "icon": "book-open-cover"
-        }
-      ]
-    }
+    "global": {}
   },
   "logo": {
     "light": "/logo/light.svg",
@@ -110,6 +102,11 @@
      "cursor",
      "vscode"
    ]
+  },
+  "seo": {
+    "title": "Milo Developer Docs - Milo Developer Documentation",
+    "description": "Official developer documentation for Milo. Get started with guides, API references, and integrations.",
+    "image": "/images/milo.png"
   },
   "footer": {
     "socials": {
