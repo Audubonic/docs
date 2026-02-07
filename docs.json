@@ -103,6 +103,9 @@
      "vscode"
    ]
   },
+  "search": {
+    "ai": true
+  },
   "layout": {
     "toc": false
   },
