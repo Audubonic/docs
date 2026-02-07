@@ -9,8 +9,10 @@
   },
   "favicon": "/favicon.png",
   "background": {
-    "light": "#FAF9F5",
-    "dark": "#262624"
+    "color": {
+      "light": "#FAF9F5",
+      "dark": "#262624"
+    }
   },
   "navigation": {
     "tabs": [
