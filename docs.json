@@ -107,9 +107,9 @@
     "og:site_name": "Milo Developer Docs",
     "og:title": "Milo Developer Docs - Milo Developer Documentation",
     "og:description": "Official developer documentation for Milo. Get started with guides, API references, and integrations.",
-    "og:image": "/milo.png",
+    "og:image": "/milo-share.png",
     "twitter:card": "summary_large_image",
-    "twitter:image": "/milo.png"
+    "twitter:image": "/milo-share.png"
   },
   "footer": {
     "socials": {
