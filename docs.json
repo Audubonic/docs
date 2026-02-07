@@ -103,10 +103,13 @@
      "vscode"
    ]
   },
-  "seo": {
-    "title": "Milo Developer Docs - Milo Developer Documentation",
-    "description": "Official developer documentation for Milo. Get started with guides, API references, and integrations.",
-    "image": "/images/milo.png"
+  "metadata": {
+    "og:site_name": "Milo Developer Docs",
+    "og:title": "Milo Developer Docs - Milo Developer Documentation",
+    "og:description": "Official developer documentation for Milo. Get started with guides, API references, and integrations.",
+    "og:image": "/milo.png",
+    "twitter:card": "summary_large_image",
+    "twitter:image": "/milo.png"
   },
   "footer": {
     "socials": {
