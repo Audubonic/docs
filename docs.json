@@ -1,0 +1,131 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Milo",
+  "colors": {
+    "primary": "#7C5CFC",
+    "light": "#7C5CFC",
+    "dark": "#ceb7e2"
+  },
+  "favicon": "/favicon.png",
+  "background": {
+    "color": {
+      "light": "#FAF9F5",
+      "dark": "#262624"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Docs",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Customization",
+            "pages": [
+              "essentials/settings",
+              "essentials/navigation"
+            ]
+          },
+          {
+            "group": "Writing content",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/reusable-snippets"
+            ]
+          },
+          {
+            "group": "AI tools",
+            "pages": [
+              "ai-tools/cursor",
+              "ai-tools/claude-code",
+              "ai-tools/windsurf"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "API documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Endpoint examples",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {}
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@audubonic.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://runmilo.ai"
+    }
+  },
+  "contextual": {
+    "options": [
+     "copy",
+     "view",
+     "chatgpt",
+     "claude",
+     "perplexity",
+     "mcp",
+     "cursor",
+     "vscode"
+   ]
+  },
+  "search": {
+    "ai": true
+  },
+  "chat": {
+    "enabled": true
+  },
+  "layout": {
+    "toc": false
+  },
+  "metadata": {
+    "og:site_name": "Milo Developer Docs",
+    "og:title": "Milo Developer Docs - Milo Developer Documentation",
+    "og:description": "Official developer documentation for Milo. Get started with guides, API references, and integrations.",
+    "og:image": "/milo-share.png",
+    "twitter:card": "summary_large_image",
+    "twitter:image": "/milo-share.png"
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/usemiloai",
+      "linkedin": "https://www.linkedin.com/company/runmiloai"
+    }
+  }
+}
