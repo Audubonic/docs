@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Milo",
+  "name": "Milo Docs",
   "colors": {
     "primary": "#7C5CFC",
     "light": "#7C5CFC",
@@ -125,7 +125,15 @@
   "footer": {
     "socials": {
       "x": "https://x.com/usemiloai",
-      "linkedin": "https://www.linkedin.com/company/runmiloai"
+      "linkedin": "https://www.linkedin.com/company/runmiloai",
+      "website": "https://runmilo.io"
     }
+  },
+  "thumbnails": {
+    "appearance": "light",
+    "background": "/milo-share.png"
+  },
+  "fonts": {
+    "family": "Inter"
   }
 }
