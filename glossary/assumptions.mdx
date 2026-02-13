@@ -1,0 +1,146 @@
+---
+title: "Assumptions"
+description: "Underwriting assumptions you can adjust in Milo to model different scenarios."
+---
+
+Every underwriting model is built on assumptions. Milo pre-fills sensible defaults based on the property and market data, but you can adjust any of them to match your thesis and stress-test different scenarios.
+
+## Hold Period
+
+How long you plan to own the property before selling. The hold period determines how many years of cash flow are projected and when the exit (sale) occurs. Most multifamily deals underwrite to a 5–7 year hold.
+
+**How Milo uses it:** The hold period sets the timeline for Milo's entire projection — year-by-year cash flows, return metrics, and the exit analysis are all built around this number.
+
+**Example:** A 5-year hold means Milo projects 5 years of operations plus a sale in Year 5.
+
+---
+
+## Rent Growth Rate (Annual)
+
+The percentage you expect rents to increase each year. This is one of the most sensitive assumptions in the model — small changes in rent growth compound significantly over a multi-year hold.
+
+**How Milo uses it:** Milo applies rent growth to GPR each year, compounding annually. Adjusting rent growth by even 1% can meaningfully swing your projected IRR.
+
+**Example:** Starting GPR of $480,000 with 3% annual growth:
+
+```
+Year 1: $480,000
+Year 2: $494,400
+Year 3: $509,232
+Year 4: $524,509
+Year 5: $540,244
+```
+
+<Tip>
+Be realistic with rent growth. Markets with 5%+ historical growth may not sustain it. Milo lets you compare scenarios — try conservative, base, and optimistic cases.
+</Tip>
+
+---
+
+## Expense Growth Rate (Annual)
+
+The percentage you expect operating expenses to increase each year. Expenses don't stay flat — taxes get reassessed, insurance premiums rise, labor costs increase. A common assumption is 2–3% annually, though specific line items (especially taxes and insurance) can jump more.
+
+**How Milo uses it:** Milo applies expense growth to each expense category annually. If rent growth outpaces expense growth, your NOI margin improves over time.
+
+**Example:** Total OpEx of $259,262 with 2.5% annual growth:
+
+```
+Year 1: $259,262
+Year 2: $265,744
+Year 3: $272,388
+Year 4: $279,197
+Year 5: $286,177
+```
+
+---
+
+## Exit Cap Rate
+
+The capitalization rate you assume the property will sell at when you exit. The exit cap rate, combined with your projected NOI at the time of sale, determines the property's future sale price.
+
+**Formula**
+
+```
+Sale Price = Projected NOI at Exit / Exit Cap Rate
+```
+
+**How Milo uses it:** Milo uses the exit cap rate to calculate the reversion value (sale price). A conservative underwriter typically adds 10–25 basis points to the entry cap rate as a cushion.
+
+**Example:** If Year 5 NOI is projected at $210,000 and you assume a 5.0% exit cap:
+
+```
+Sale Price = $210,000 / 5.0% = $4,200,000
+```
+
+<Warning>
+The exit cap rate is one of the most impactful assumptions. A 25-basis-point change can swing the sale price by hundreds of thousands of dollars. Stress-test this assumption.
+</Warning>
+
+---
+
+## Vacancy Assumption
+
+The stabilized vacancy rate you underwrite to. Even in a strong market, some vacancy is inevitable due to turnover, make-ready periods, and seasonal fluctuations.
+
+**How Milo uses it:** Milo applies the vacancy assumption to your GPR each year. It also shows how your assumed vacancy compares to the actual vacancy in your rent roll.
+
+**Example:** Most underwriters use 5–7% for stabilized multifamily. In a tight market you might go to 3–4%; in a softer market, 8–10%.
+
+---
+
+## CapEx Budget / Per Unit CapEx
+
+The total capital expenditure budget for renovations and improvements — unit upgrades, exterior work, amenity improvements. For value-add deals, this is the money you're spending to drive rent increases.
+
+**Formula**
+
+```
+Total CapEx = Per Unit CapEx x Number of Units
+```
+
+**How Milo uses it:** Milo adds CapEx to your total project cost (affecting equity required and return on cost) and can spread it across the hold period based on your renovation timeline.
+
+**Example:** Budget $15,000/unit to renovate interiors on a 32-unit property:
+
+```
+Total CapEx = $15,000 x 32 = $480,000
+```
+
+---
+
+## Closing Costs (% of Purchase Price)
+
+Transaction costs associated with acquiring the property — lender fees, title insurance, legal fees, appraisal, environmental reports, and transfer taxes. Typically 2–4% of the purchase price.
+
+**Formula**
+
+```
+Closing Costs = Purchase Price x Closing Cost %
+```
+
+**How Milo uses it:** Milo adds closing costs to the total project cost, which increases the total equity required and impacts return on cost calculations.
+
+**Example:** At 3% on a $4,000,000 purchase:
+
+```
+Closing Costs = $4,000,000 x 3% = $120,000
+```
+
+---
+
+## Renovation / Value-Add Budget
+
+The total budget for improvements designed to increase rents and property value. This includes unit interior renovations (kitchens, bathrooms, flooring, fixtures) and exterior/amenity improvements (landscaping, clubhouse, dog park, signage).
+
+**How Milo uses it:** Milo factors the renovation budget into total project cost and models the rent premiums you expect to achieve post-renovation. This is what makes value-add deals pencil — you're spending money to earn a higher return on cost than the market cap rate.
+
+**Example:**
+
+| Improvement | Cost |
+|------------|------|
+| Unit interiors (32 units x $12,000) | $384,000 |
+| Exterior paint & landscaping | $45,000 |
+| Common area upgrades | $30,000 |
+| Contingency (10%) | $45,900 |
+| **Total Renovation Budget** | **$504,900** |

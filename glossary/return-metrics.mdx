@@ -1,0 +1,139 @@
+---
+title: "Return Metrics"
+description: "Key return metrics used to evaluate multifamily investment performance in Milo."
+---
+
+## Capitalization Rate (Cap Rate)
+
+The ratio of NOI to property value. Cap rate tells you the unleveraged yield a property produces — what you'd earn if you paid all cash. There are two cap rates that matter in every deal:
+
+- **Entry (going-in) cap rate** — NOI divided by your purchase price
+- **Exit cap rate** — projected NOI at sale divided by the expected sale price
+
+**Formula**
+
+```
+Cap Rate = NOI / Property Value x 100
+```
+
+**How Milo uses it:** Milo calculates the entry cap rate from your T12 NOI and purchase price. The exit cap rate is an assumption you set — it drives the projected sale price at the end of your hold period.
+
+**Example:**
+
+```
+Entry Cap Rate = $181,978 / $4,000,000 = 4.55%
+```
+
+If you assume a 5.0% exit cap and Year 5 NOI of $210,000:
+
+```
+Exit Value = $210,000 / 5.0% = $4,200,000
+```
+
+<Note>
+A lower cap rate means a higher price relative to income. Cap rates vary significantly by market, property class, and risk profile.
+</Note>
+
+---
+
+## Cash-on-Cash Return (CoC)
+
+The annual cash flow you receive as a percentage of the cash you invested. This is the "what am I actually getting paid on my money this year?" metric. Unlike cap rate, CoC accounts for leverage.
+
+**Formula**
+
+```
+Cash-on-Cash Return = Annual Before-Tax Cash Flow / Total Cash Invested x 100
+```
+
+**How Milo uses it:** Milo calculates CoC for each year of the hold period so you can see how returns ramp as rents grow and debt gets paid down.
+
+**Example:** You invest $1,200,000 in equity and receive $72,000 in Year 1 cash flow:
+
+```
+CoC = $72,000 / $1,200,000 = 6.0%
+```
+
+---
+
+## Internal Rate of Return (IRR)
+
+The annualized return that accounts for the *timing* of every cash flow — your initial investment, annual distributions, and proceeds at sale. IRR is the industry-standard metric for comparing investments with different hold periods and cash flow profiles.
+
+- **Levered IRR** — includes the effects of debt (the return on your equity)
+- **Unlevered IRR** — ignores debt (the return on the total investment, as if all-cash)
+
+**How Milo uses it:** Milo projects year-by-year cash flows and calculates both levered and unlevered IRR. Adjusting any assumption (rent growth, exit cap, hold period) instantly updates the IRR so you can stress-test scenarios.
+
+**Example:** You invest $1,200,000, receive $72K–$96K/year for 5 years, and net $1,500,000 at sale after paying off the loan:
+
+```
+Levered IRR ≈ 18.2%
+Unlevered IRR ≈ 11.4%
+```
+
+The spread between levered and unlevered IRR shows the impact of leverage on returns.
+
+---
+
+## Average Annual Return (AAR)
+
+A simpler measure of annualized return — total profit divided by equity invested, spread evenly across the hold period. Unlike IRR, AAR doesn't account for the timing of cash flows, but it's useful for quick back-of-envelope comparisons.
+
+**Formula**
+
+```
+AAR = (Total Cash Distributions + Sale Proceeds - Total Equity Invested) / (Total Equity Invested x Hold Period) x 100
+```
+
+**How Milo uses it:** Milo displays AAR alongside IRR so you can see both the time-weighted and simple annualized return. If AAR and IRR diverge significantly, it means the cash flow timing matters a lot in that deal.
+
+**Example:** $1,200,000 invested, $420,000 total distributions over 5 years, $1,500,000 net sale proceeds:
+
+```
+AAR = ($420,000 + $1,500,000 - $1,200,000) / ($1,200,000 x 5) = 12.0%
+```
+
+---
+
+## Equity Multiple (EM)
+
+The total return on your invested equity, expressed as a multiple. An equity multiple of 2.0x means you doubled your money. Simple, intuitive, and the first thing most investors ask about.
+
+**Formula**
+
+```
+Equity Multiple = Total Distributions + Sale Proceeds / Total Equity Invested
+```
+
+**How Milo uses it:** Milo calculates the equity multiple across the full hold period. It's displayed prominently in the returns summary.
+
+**Example:**
+
+```
+Equity Multiple = ($420,000 + $1,500,000) / $1,200,000 = 1.60x
+```
+
+You got back $1.60 for every $1.00 invested.
+
+---
+
+## Return on Cost
+
+Similar to cap rate, but uses your *total project cost* (purchase price + renovation + closing costs) instead of just the purchase price. This is the metric that tells you whether a value-add deal pencils — if return on cost exceeds the market cap rate, you're creating value.
+
+**Formula**
+
+```
+Return on Cost = Stabilized NOI / Total Project Cost x 100
+```
+
+**How Milo uses it:** Milo calculates return on cost using your projected stabilized NOI and total cost basis (purchase + CapEx + closing costs). Comparing return on cost to market cap rates shows your profit margin on the value creation.
+
+**Example:** You buy for $4M, spend $320K on renovations and $120K in closing costs, and stabilize NOI at $225,000:
+
+```
+Return on Cost = $225,000 / $4,440,000 = 5.07%
+```
+
+If market cap rates are 4.5%, you've created value — the property is worth more than you put into it.

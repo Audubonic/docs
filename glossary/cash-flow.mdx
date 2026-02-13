@@ -1,0 +1,86 @@
+---
+title: "Cash Flow"
+description: "Cash flow terms used in multifamily underwriting and Milo's analysis."
+---
+
+## Before-Tax Cash Flow (BTCF)
+
+The cash left over after paying operating expenses and debt service, but before accounting for income taxes. This is the money that actually hits your bank account each year from operations.
+
+**Formula**
+
+```
+BTCF = NOI - Annual Debt Service
+```
+
+**How Milo uses it:** Milo projects BTCF for every year of the hold period. This is the number that drives your cash-on-cash return and determines how much can be distributed to investors.
+
+**Example:**
+
+```
+  NOI                    $181,978
+- Annual Debt Service    $156,000
+= BTCF                   $25,978
+```
+
+---
+
+## Net Cash Flow (After Debt Service)
+
+Functionally the same as BTCF in most underwriting contexts — it's the cash remaining after all operating expenses and debt payments. Some models further adjust for capital expenditures or funded reserves to show a "true" distributable cash flow number.
+
+**Formula**
+
+```
+Net Cash Flow = NOI - Debt Service - CapEx (if not already in OpEx)
+```
+
+**How Milo uses it:** Milo's year-by-year cash flow projection shows net cash flow after debt service. If you've budgeted CapEx separately from operating reserves, Milo deducts it here.
+
+**Example:**
+
+```
+  NOI                    $181,978
+- Debt Service           $156,000
+- Additional CapEx        $15,000
+= Net Cash Flow           $10,978
+```
+
+---
+
+## Cash Flow Per Unit
+
+Net cash flow divided by the number of units. A simple per-unit metric that makes it easy to compare operational performance across properties of different sizes.
+
+**Formula**
+
+```
+Cash Flow Per Unit = Net Cash Flow / Number of Units
+```
+
+**How Milo uses it:** Milo displays cash flow per unit in the property summary so you can benchmark against other deals in your pipeline.
+
+**Example:**
+
+```
+Cash Flow Per Unit = $25,978 / 32 = $812/unit/year
+```
+
+---
+
+## Distributions
+
+Cash payments made to investors (LPs and GPs) from available cash flow. Distributions can be made monthly, quarterly, or annually — and are governed by the deal's waterfall structure (preferred return first, then splits).
+
+**How Milo uses it:** Milo projects annual distributable cash flow based on your financing and expense assumptions. If you've set up a waterfall structure with a preferred return, Milo shows how cash gets allocated between LP and GP investors.
+
+**Example:** On $25,978 of annual BTCF with a 70/30 LP/GP split:
+
+```
+LP Distribution = $25,978 x 70% = $18,185
+GP Distribution = $25,978 x 30% = $7,793
+```
+
+<Note>
+In practice, distributions are often held back during early-year renovation periods in value-add deals. Milo's projections show when positive distributions begin based on your assumptions.
+</Note>

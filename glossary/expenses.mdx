@@ -1,0 +1,173 @@
+---
+title: "Expenses"
+description: "Operating expense terms used in multifamily underwriting and Milo's analysis."
+---
+
+## Operating Expenses (OpEx)
+
+The recurring costs of running a property day-to-day — everything from management fees to trash pickup. OpEx does *not* include debt service or capital expenditures. This is the number that separates your revenue from your NOI.
+
+**How Milo uses it:** Milo extracts every operating expense line item from your T12 and categorizes them automatically. You'll see a full breakdown in the expense section of every analysis.
+
+---
+
+## Management Fee
+
+What you pay the property management company to handle leasing, maintenance coordination, tenant relations, and day-to-day operations. Usually calculated as a percentage of EGI.
+
+**Formula**
+
+```
+Management Fee = EGI x Management Fee %
+```
+
+**How Milo uses it:** Milo pulls the management fee from your T12. If you're underwriting a new management structure, you can adjust the percentage in your assumptions.
+
+**Example:** At 5% of $441,240 EGI:
+
+```
+Management Fee = $441,240 x 5% = $22,062
+```
+
+---
+
+## Replacement Reserves / CapEx Reserves
+
+Money set aside each year for big-ticket items that wear out over time — roofs, HVAC systems, parking lots, appliances. This isn't an expense you write a check for every month, but smart underwriting always accounts for it.
+
+**Formula**
+
+```
+Replacement Reserves = Per-Unit Reserve x Number of Units
+```
+
+**How Milo uses it:** Milo includes replacement reserves in the expense stack. You can adjust the per-unit reserve amount in your assumptions (industry standard is $250–$350/unit/year).
+
+**Example:** 32 units at $300/unit/year:
+
+```
+Replacement Reserves = 32 x $300 = $9,600/year
+```
+
+---
+
+## Real Estate Taxes
+
+Property taxes assessed by the local government, typically based on assessed value. These are usually the single largest expense line item. After acquisition, taxes often get reassessed based on your purchase price — a critical underwriting consideration.
+
+**How Milo uses it:** Milo extracts current taxes from your T12 and OM. When setting assumptions, consider whether taxes will be reassessed post-closing.
+
+**Example:** A property with a $4M assessed value at a 2.1% tax rate:
+
+```
+Real Estate Taxes = $4,000,000 x 2.1% = $84,000/year
+```
+
+---
+
+## Insurance
+
+Property and liability insurance premiums. Costs vary by location (flood zones, hurricane-prone areas cost more), property age, and coverage limits.
+
+**How Milo uses it:** Milo pulls insurance costs from your T12. If you expect a rate change post-acquisition, adjust it in your expense assumptions.
+
+**Example:** A 32-unit property might run $800–$1,200 per unit annually:
+
+```
+Insurance = 32 x $1,000 = $32,000/year
+```
+
+---
+
+## Utilities
+
+Costs for water, sewer, gas, electric, and trash — either paid by the owner or partially passed through to tenants via RUBS. Which utilities the owner pays varies widely by property and market.
+
+**How Milo uses it:** Milo extracts utility expenses from your T12, broken out by type when available. Properties with owner-paid utilities will show higher OpEx but may also show RUBS reimbursement under other income.
+
+**Example:**
+
+| Utility | Annual Cost |
+|---------|------------|
+| Water/Sewer | $28,800 |
+| Electric (common area) | $7,200 |
+| Gas | $9,600 |
+| Trash | $6,000 |
+| **Total** | **$51,600** |
+
+---
+
+## Repairs & Maintenance
+
+The cost of keeping the property in working order — fixing leaky faucets, replacing carpet, painting units on turnover, landscaping, pest control. These are routine, recurring costs, not major capital projects.
+
+**How Milo uses it:** Milo pulls R&M from your T12 line items. A spike in R&M can indicate deferred maintenance, which Milo flags in context.
+
+**Example:** A well-maintained 32-unit property might spend $1,200–$1,800 per unit:
+
+```
+Repairs & Maintenance = 32 x $1,500 = $48,000/year
+```
+
+---
+
+## General & Administrative (G&A)
+
+The catch-all for office and overhead costs — accounting, legal, advertising, office supplies, software, tenant screening fees, and bank charges. Usually a smaller line item but adds up.
+
+**How Milo uses it:** Milo groups G&A costs from your T12 into this category. It's part of the total operating expense calculation.
+
+**Example:**
+
+```
+G&A = $12,000/year (roughly $375/unit)
+```
+
+---
+
+## Total Operating Expenses
+
+The sum of all operating expense line items. This is the number subtracted from EGI to arrive at NOI.
+
+**Formula**
+
+```
+Total OpEx = Management Fee + Taxes + Insurance + Utilities + R&M + G&A + Reserves + Other Expenses
+```
+
+**How Milo uses it:** Milo totals all extracted expenses and displays them in a detailed breakdown. The total flows directly into the NOI calculation.
+
+**Example:**
+
+```
+  Management Fee         $22,062
+  Real Estate Taxes      $84,000
+  Insurance              $32,000
+  Utilities              $51,600
+  Repairs & Maintenance  $48,000
+  G&A                    $12,000
+  Replacement Reserves    $9,600
+= Total OpEx           $259,262
+```
+
+---
+
+## Expense Ratio (OpEx as % of EGI)
+
+The percentage of your collected revenue consumed by operating expenses. This tells you how efficiently the property is being run. Multifamily typically runs 40–55% — anything outside that range is worth investigating.
+
+**Formula**
+
+```
+Expense Ratio = Total OpEx / EGI x 100
+```
+
+**How Milo uses it:** Milo calculates and displays the expense ratio so you can quickly benchmark a property against market norms. An unusually low ratio might mean deferred maintenance; an unusually high one might mean operational upside.
+
+**Example:**
+
+```
+Expense Ratio = $259,262 / $441,240 = 58.8%
+```
+
+This is on the higher side — could indicate utility costs that should be billed back to tenants or room to reduce R&M with capital improvements.

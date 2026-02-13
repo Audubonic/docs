@@ -1,0 +1,157 @@
+---
+title: "Debt & Leverage"
+description: "Debt and financing terms used in multifamily underwriting and Milo's analysis."
+---
+
+## Loan-to-Value Ratio (LTV)
+
+The percentage of the property's value that the lender will finance. Higher LTV means more leverage (and less equity required), but also more risk and typically a higher interest rate.
+
+**Formula**
+
+```
+LTV = Loan Amount / Property Value x 100
+```
+
+**How Milo uses it:** LTV is a key financing assumption you set in Milo. It determines the loan amount, which flows into debt service calculations and equity requirements.
+
+**Example:** On a $4,000,000 purchase with 70% LTV:
+
+```
+Loan Amount = $4,000,000 x 70% = $2,800,000
+Equity Required = $4,000,000 - $2,800,000 = $1,200,000
+```
+
+---
+
+## Debt Service Coverage Ratio (DSCR)
+
+The ratio of NOI to annual debt service. DSCR tells the lender (and you) how comfortably the property's income covers its loan payments. Most lenders require a minimum DSCR of 1.20x–1.25x — meaning NOI needs to exceed debt service by at least 20–25%.
+
+**Formula**
+
+```
+DSCR = NOI / Annual Debt Service
+```
+
+**How Milo uses it:** Milo calculates DSCR for every year of the hold period. If DSCR drops below typical lender thresholds, it's a signal to revisit your assumptions or deal structure.
+
+**Example:**
+
+```
+DSCR = $181,978 / $156,000 = 1.17x
+```
+
+<Warning>
+A DSCR below 1.25x may make it difficult to secure financing. Below 1.0x means the property can't cover its debt payments from operations.
+</Warning>
+
+---
+
+## Debt Yield
+
+NOI divided by the loan amount. Lenders increasingly use debt yield as a sizing metric because it's independent of interest rates and amortization. Think of it as the lender's cap rate on their loan.
+
+**Formula**
+
+```
+Debt Yield = NOI / Loan Amount x 100
+```
+
+**How Milo uses it:** Milo calculates debt yield in the financing section. Minimum thresholds vary by lender, but 8–10% is a common floor for agency loans.
+
+**Example:**
+
+```
+Debt Yield = $181,978 / $2,800,000 = 6.5%
+```
+
+---
+
+## Annual Debt Service
+
+The total principal and interest payments on the loan over a 12-month period. This is the fixed obligation that gets subtracted from NOI to arrive at cash flow.
+
+**Formula**
+
+```
+Annual Debt Service = Monthly Mortgage Payment x 12
+```
+
+**How Milo uses it:** Milo calculates annual debt service based on your financing assumptions (loan amount, interest rate, amortization schedule, IO period) and subtracts it from NOI to project cash flow.
+
+**Example:** A $2,800,000 loan at 6.5% with 30-year amortization:
+
+```
+Monthly Payment ≈ $17,700
+Annual Debt Service ≈ $212,400
+```
+
+---
+
+## Loan Constant
+
+Annual debt service expressed as a percentage of the loan amount. It combines the effects of interest rate and amortization into a single number, making it easy to compare different loan structures.
+
+**Formula**
+
+```
+Loan Constant = Annual Debt Service / Loan Amount x 100
+```
+
+**How Milo uses it:** Milo displays the loan constant so you can quickly gauge the all-in cost of debt. If the loan constant exceeds the cap rate, leverage is *negative* — meaning debt is dragging down your returns, not boosting them.
+
+**Example:**
+
+```
+Loan Constant = $212,400 / $2,800,000 = 7.59%
+```
+
+Since the entry cap rate is 4.55%, leverage is negative in this example — the cost of debt exceeds the property yield.
+
+---
+
+## Interest Rate vs. Mortgage Rate
+
+These are often used interchangeably, but there's a distinction:
+
+- **Interest rate (note rate)** — the rate charged on the loan balance, stated in the loan documents
+- **Mortgage rate (effective rate)** — can include the effect of points, fees, and other costs, giving you the true cost of borrowing
+
+**How Milo uses it:** Milo uses the interest rate you input to calculate debt service. When comparing loan quotes, look at the effective rate (including fees) to make apples-to-apples comparisons.
+
+---
+
+## Amortization Period vs. Loan Term
+
+Two different clocks running on the same loan:
+
+- **Amortization period** — the schedule over which the loan *would* be fully paid off (typically 25–30 years). This determines your monthly payment amount.
+- **Loan term** — how long the loan actually lasts before it matures and you must refinance or pay it off (typically 5–10 years).
+
+**How Milo uses it:** Milo uses both to model your debt. The amortization period sets the payment amount; the loan term determines the remaining balance at maturity (relevant for refinancing or exit analysis).
+
+**Example:** A 30-year amortization with a 7-year term means your payments are calculated as if you'll pay over 30 years, but the remaining balance is due in full at year 7.
+
+---
+
+## Interest-Only (IO) Period
+
+A period at the beginning of the loan where you only pay interest — no principal paydown. IO periods lower your debt service in the early years, boosting initial cash flow. Common in value-add deals where you need breathing room during renovations.
+
+**Formula**
+
+```
+IO Payment = Loan Amount x Interest Rate / 12  (monthly)
+```
+
+**How Milo uses it:** If you set an IO period in your financing assumptions, Milo adjusts the debt service schedule accordingly — lower payments during IO, then higher payments once amortization kicks in.
+
+**Example:** $2,800,000 loan at 6.5% interest-only:
+
+```
+Monthly IO Payment = $2,800,000 x 6.5% / 12 = $15,167
+Annual IO Debt Service = $182,000
+```
+
+Compare that to $212,400 with full amortization — IO saves $30,400/year in debt service during the IO period.

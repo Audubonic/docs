@@ -1,0 +1,124 @@
+---
+title: "Deal Structure"
+description: "Equity, waterfall, and disposition terms used in multifamily deal structuring."
+---
+
+## Equity Required / Total Equity
+
+The cash you (and your investors) need to bring to the table. Total equity covers the gap between the loan amount and the full project cost — including purchase price, closing costs, renovation budget, and reserves.
+
+**Formula**
+
+```
+Total Equity = Purchase Price + Closing Costs + CapEx + Reserves - Loan Amount
+```
+
+**How Milo uses it:** Milo calculates total equity required based on your purchase price, financing terms, and CapEx budget. This is the denominator for cash-on-cash return and equity multiple calculations.
+
+**Example:**
+
+```
+  Purchase Price       $4,000,000
++ Closing Costs          $120,000
++ Renovation Budget      $480,000
++ Operating Reserves      $50,000
+- Loan Amount         ($2,800,000)
+= Total Equity        $1,850,000
+```
+
+---
+
+## Waterfall Distribution / Promote Structure
+
+The rules governing how cash flow and sale proceeds get split between investors (LPs) and the deal sponsor (GP). A waterfall is structured in tiers — each tier defines who gets paid and how much before the next tier kicks in.
+
+A typical waterfall:
+
+1. **Return of capital** — investors get their money back first
+2. **Preferred return** — investors earn a minimum return before the GP participates
+3. **Catch-up** — the GP receives a larger share until they've "caught up" to a target split
+4. **Residual split** — remaining profits split according to the LP/GP agreement
+
+**How Milo uses it:** Milo models the waterfall structure you define and shows how cash flow and exit proceeds are allocated to LPs and GPs at each tier.
+
+---
+
+## Preferred Return (Pref)
+
+A minimum annualized return that LPs earn *before* the GP receives any promote or profit share. The pref is usually 6–8% and accrues — meaning if cash flow is short in one year, the unpaid pref carries forward.
+
+**Formula**
+
+```
+Annual Pref = LP Equity Invested x Preferred Return %
+```
+
+**How Milo uses it:** Milo calculates the preferred return each year and tracks whether it's been fully paid. Shortfalls are accrued and paid from future cash flow or sale proceeds.
+
+**Example:** $1,500,000 LP equity at an 8% pref:
+
+```
+Annual Pref = $1,500,000 x 8% = $120,000/year
+```
+
+LPs receive $120,000/year before the GP participates in profits.
+
+---
+
+## LP/GP Split
+
+The percentage split of profits between limited partners (LPs — the passive investors) and the general partner (GP — the deal sponsor). Splits often change at different return thresholds in the waterfall.
+
+**How Milo uses it:** Milo applies the LP/GP split to distributable cash flow and exit proceeds. If the waterfall has multiple tiers with different splits, Milo models each tier.
+
+**Example:** A common structure:
+
+| Return Tier | LP Share | GP Share |
+|------------|---------|---------|
+| Up to 8% pref | 100% | 0% |
+| 8%–15% IRR | 70% | 30% |
+| Above 15% IRR | 50% | 50% |
+
+---
+
+## Reversion Value (Sale Proceeds at Exit)
+
+The net amount received when you sell the property at the end of the hold period. This is the gross sale price minus selling costs, remaining loan balance, and any other payoffs.
+
+**Formula**
+
+```
+Gross Sale Price = Projected Exit NOI / Exit Cap Rate
+Reversion Value = Gross Sale Price - Selling Costs - Remaining Loan Balance
+```
+
+**How Milo uses it:** Milo calculates the reversion value as part of the exit analysis. This is the final cash flow in the IRR calculation and often represents the majority of total returns.
+
+**Example:**
+
+```
+  Gross Sale Price        $4,200,000
+- Selling Costs (2%)       ($84,000)
+- Remaining Loan Balance ($2,650,000)
+= Net Reversion Value    $1,466,000
+```
+
+---
+
+## Disposition Fee
+
+A fee paid to the GP or broker for managing the sale of the property. Typically 1–2% of the gross sale price, charged at exit.
+
+**Formula**
+
+```
+Disposition Fee = Gross Sale Price x Disposition Fee %
+```
+
+**How Milo uses it:** Milo deducts the disposition fee from gross sale proceeds when calculating net reversion value and total returns.
+
+**Example:**
+
+```
+Disposition Fee = $4,200,000 x 1% = $42,000
+```

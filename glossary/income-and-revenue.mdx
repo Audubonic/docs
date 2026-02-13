@@ -1,0 +1,147 @@
+---
+title: "Income & Revenue"
+description: "Key income and revenue terms used in multifamily underwriting and Milo's analysis."
+---
+
+## Gross Potential Rent (GPR)
+
+The total rental income a property would generate if every unit were leased at full market rent with zero vacancy. This is your theoretical ceiling — the best-case revenue number before any real-world adjustments.
+
+**Formula**
+
+```
+GPR = Number of Units x Market Rent per Unit x 12
+```
+
+**How Milo uses it:** GPR is the starting point of every income analysis Milo generates. It's pulled from your rent roll and unit mix to establish the top-line revenue figure.
+
+**Example:** A 32-unit property with an average market rent of $1,250/unit:
+
+```
+GPR = 32 x $1,250 x 12 = $480,000
+```
+
+---
+
+## Loss to Lease
+
+The difference between what you *could* charge (market rent) and what tenants are *actually* paying (in-place rent). This happens when existing leases were signed at lower rents and haven't rolled to market yet.
+
+**Formula**
+
+```
+Loss to Lease = GPR - Total In-Place Rent (annualized)
+```
+
+**How Milo uses it:** Milo calculates loss to lease by comparing market rents against in-place rents from your rent roll. A high loss to lease can signal upside — room to push rents at renewal.
+
+**Example:** If GPR is $480,000 but current leases total $456,000 annually:
+
+```
+Loss to Lease = $480,000 - $456,000 = $24,000 (5% of GPR)
+```
+
+---
+
+## Vacancy Loss / Vacancy Rate
+
+The income you lose because some units sit empty. Vacancy rate is expressed as a percentage of GPR. Even well-run properties carry some vacancy — there's always turnover.
+
+**Formula**
+
+```
+Vacancy Loss = GPR x Vacancy Rate
+Vacancy Rate = Vacant Units / Total Units
+```
+
+**How Milo uses it:** Milo applies your vacancy assumption (adjustable) to the income model. It also cross-references actual vacancy from your rent roll against your assumption so you can see the gap.
+
+**Example:** At 5% vacancy on $480,000 GPR:
+
+```
+Vacancy Loss = $480,000 x 5% = $24,000
+```
+
+---
+
+## Concessions
+
+Discounts or incentives offered to attract or retain tenants — free months of rent, reduced deposits, move-in specials. These reduce your effective collected revenue.
+
+**Formula**
+
+```
+Concessions = Total Value of Discounts Given (annualized)
+```
+
+**How Milo uses it:** Milo extracts concession data from your T12 and factors it into the income waterfall between GPR and Effective Gross Income.
+
+**Example:** If you offered one month free on 4 units at $1,250/month:
+
+```
+Concessions = 4 x $1,250 = $5,000
+```
+
+---
+
+## Bad Debt / Credit Loss
+
+Rent that tenants owe but never pay. This is income on paper that you'll never collect — think evictions, skips, and unpaid balances sent to collections.
+
+**Formula**
+
+```
+Bad Debt = Billed Rent - Collected Rent (for delinquent accounts)
+```
+
+**How Milo uses it:** Milo pulls bad debt from your T12 line items. High bad debt relative to GPR is a red flag Milo highlights in the income breakdown.
+
+**Example:** If $8,000 in rent was billed but never collected over 12 months:
+
+```
+Bad Debt = $8,000 (roughly 1.7% of $480,000 GPR)
+```
+
+---
+
+## Other Income
+
+Revenue from sources besides rent — laundry facilities, parking fees, pet rent, storage units, RUBS (Ratio Utility Billing System), application fees, late fees, and vending machines.
+
+**How Milo uses it:** Milo extracts other income line items from your T12 and includes them in the total income calculation. Strong other income can meaningfully boost NOI.
+
+**Example:**
+
+| Source | Annual Income |
+|--------|-------------|
+| Laundry | $6,400 |
+| Parking | $9,600 |
+| Pet fees | $3,840 |
+| Late fees | $2,400 |
+| **Total Other Income** | **$22,240** |
+
+---
+
+## Effective Gross Income (EGI)
+
+The actual revenue you expect to collect after subtracting all the real-world hits from GPR. This is the income number that matters — it's what flows into your expense analysis.
+
+**Formula**
+
+```
+EGI = GPR - Vacancy Loss - Loss to Lease - Concessions - Bad Debt + Other Income
+```
+
+**How Milo uses it:** EGI is the revenue line that feeds into Milo's NOI calculation. Every expense ratio and return metric references EGI as the top-line number.
+
+**Example:**
+
+```
+  GPR                   $480,000
+- Vacancy Loss          ($24,000)
+- Loss to Lease         ($24,000)
+- Concessions            ($5,000)
+- Bad Debt               ($8,000)
++ Other Income           $22,240
+= EGI                  $441,240
+```

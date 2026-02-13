@@ -1,0 +1,82 @@
+---
+title: "Valuation & Pricing"
+description: "Valuation and pricing terms used in multifamily underwriting and Milo's analysis."
+---
+
+## Purchase Price
+
+The total price you're paying (or proposing to pay) for the property. This is the starting point for every return calculation and determines your equity requirement after financing.
+
+**How Milo uses it:** Milo uses the purchase price from your OM or your manual input to calculate entry cap rate, price per unit, equity required, and all return metrics.
+
+**Example:**
+
+```
+Purchase Price = $4,000,000
+```
+
+---
+
+## Price Per Unit
+
+The purchase price divided by the total number of units. This is the most common quick-comparison metric in multifamily — it lets you benchmark a deal against comps regardless of property size.
+
+**Formula**
+
+```
+Price Per Unit = Purchase Price / Number of Units
+```
+
+**How Milo uses it:** Milo calculates and displays price per unit in the property overview. It's useful for sanity-checking a deal against recent sales in the submarket.
+
+**Example:**
+
+```
+Price Per Unit = $4,000,000 / 32 = $125,000/unit
+```
+
+<Tip>
+Price per unit varies dramatically by market. A $125K/unit deal might be a steal in Austin and overpriced in a rural secondary market. Always compare against local comps.
+</Tip>
+
+---
+
+## Price Per Square Foot
+
+The purchase price divided by total rentable square footage. More granular than price per unit because it accounts for unit size differences — a property with mostly 2-bedrooms will look different on a per-SF basis than one with studios.
+
+**Formula**
+
+```
+Price Per SF = Purchase Price / Total Rentable Square Footage
+```
+
+**How Milo uses it:** Milo calculates price per square foot when unit square footage data is available from your rent roll or OM. It's displayed alongside price per unit for a more complete pricing picture.
+
+**Example:** 32 units averaging 850 SF each:
+
+```
+Total SF = 32 x 850 = 27,200 SF
+Price Per SF = $4,000,000 / 27,200 = $147/SF
+```
+
+---
+
+## Assessed Value vs. Market Value
+
+Two different ways to put a number on a property:
+
+- **Assessed value** — the value assigned by the local tax assessor for property tax purposes. Often lags behind market conditions and may be significantly lower (or occasionally higher) than what the property would actually sell for.
+- **Market value** — what a willing buyer would pay a willing seller in an arm's-length transaction. In practice, this is the purchase price for a recent sale, or an appraised value based on comparable sales and income analysis.
+
+**How Milo uses it:** Milo pulls the assessed value from your documents when available and shows it alongside the purchase price. A large gap between assessed and market value signals that property taxes may be reassessed post-acquisition — a critical expense adjustment to model.
+
+**Example:**
+
+```
+Assessed Value  = $3,200,000
+Purchase Price  = $4,000,000
+Gap             = $800,000
+```
+
+If the county reassesses at the purchase price with a 2.1% tax rate, your annual tax bill jumps from $67,200 to $84,000 — a $16,800/year increase that directly impacts NOI.

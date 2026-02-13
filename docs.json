@@ -51,6 +51,28 @@
               "ai-tools/claude-code",
               "ai-tools/windsurf"
             ]
+          },
+          {
+            "group": "Using Milo",
+            "pages": [
+              "using-milo/suggested-documents",
+              "using-milo/underwriting-workflow"
+            ]
+          },
+          {
+            "group": "CRE Glossary",
+            "pages": [
+              "glossary/income-and-revenue",
+              "glossary/expenses",
+              "glossary/net-operating-income",
+              "glossary/return-metrics",
+              "glossary/debt-and-leverage",
+              "glossary/valuation-and-pricing",
+              "glossary/cash-flow",
+              "glossary/assumptions",
+              "glossary/deal-structure",
+              "glossary/document-types"
+            ]
           }
         ]
       },
