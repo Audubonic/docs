@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Milo Developer Docs",
+  "name": "Milo Docs",
   "colors": {
     "primary": "#7C5CFC",
     "light": "#7C5CFC",
@@ -137,5 +137,5 @@
   "fonts": {
     "family": "Inter"
   },
-  "description": "Official developer documentation for Milo. Get started with guides, API references, and integrations."
+  "description": "Official documentation for Milo. Get started with guides, API references, and integrations."
 }
