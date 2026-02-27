@@ -1,0 +1,193 @@
+---
+title: Extract
+openapi: POST /extract
+---
+
+<RequestExample>
+```bash cURL
+curl -X POST https://api.runmilo.ai/v1/extract \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "files=@rent-roll.pdf" \
+  -F "files=@operating-statement.xlsx"
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.runmilo.ai/v1/extract",
+    headers={"Authorization": "Bearer YOUR_API_KEY"},
+    files=[
+        ("files", open("rent-roll.pdf", "rb")),
+        ("files", open("operating-statement.xlsx", "rb")),
+    ],
+)
+
+print(response.json())
+```
+
+```javascript Node.js
+const form = new FormData();
+form.append("files", fs.createReadStream("rent-roll.pdf"));
+form.append("files", fs.createReadStream("operating-statement.xlsx"));
+
+const response = await fetch("https://api.runmilo.ai/v1/extract", {
+  method: "POST",
+  headers: { Authorization: "Bearer YOUR_API_KEY" },
+  body: form,
+});
+
+const data = await response.json();
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200
+{
+  "deal_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "status": "completed",
+  "property": {
+    "property_name": "Sunrise Apartments",
+    "property_address": "1234 Main St, Austin, TX 78701",
+    "purchase_price": 4850000,
+    "year_built": 1998,
+    "units": 48
+  },
+  "financials": {
+    "gross_potential_rent": 864000,
+    "other_income": 24000,
+    "vacancy_rate": 0.05,
+    "operating_expenses": 328320,
+    "noi": 492480,
+    "current_average_rent": 1500,
+    "manual_proven_rent": null,
+    "extra_fields": null,
+    "mapped_income": {
+      "gross_potential_rent": {
+        "value": 864000,
+        "category_display": "Gross Potential Rent",
+        "source_items": [
+          { "label": "Gross Potential Rent", "value": 864000 }
+        ],
+        "user_adjusted": false
+      },
+      "other_income": {
+        "value": 24000,
+        "category_display": "Other Income",
+        "source_items": [
+          { "label": "Laundry", "value": 12000 },
+          { "label": "Parking", "value": 12000 }
+        ],
+        "user_adjusted": false
+      },
+      "vacancy_loss": {
+        "value": -43200,
+        "category_display": "Vacancy Loss",
+        "source_items": [
+          { "label": "Vacancy Loss (5%)", "value": -43200 }
+        ],
+        "user_adjusted": false
+      }
+    },
+    "mapped_expenses": {
+      "tax_real_property": {
+        "value": 97000,
+        "category_display": "Property Tax",
+        "source_items": [
+          { "label": "Property Tax", "value": 97000 }
+        ],
+        "user_adjusted": false
+      },
+      "ins_property": {
+        "value": 48000,
+        "category_display": "Insurance",
+        "source_items": [
+          { "label": "Insurance", "value": 48000 }
+        ],
+        "user_adjusted": false
+      },
+      "repairs_maintenance": {
+        "value": 62000,
+        "category_display": "Repairs & Maintenance",
+        "source_items": [
+          { "label": "Repairs & Maintenance", "value": 62000 }
+        ],
+        "user_adjusted": false
+      },
+      "property_management_fees": {
+        "value": 41320,
+        "category_display": "Management Fee",
+        "source_items": [
+          { "label": "Management Fee", "value": 41320 }
+        ],
+        "user_adjusted": false
+      },
+      "util_water_sewer": {
+        "value": 80000,
+        "category_display": "Utilities",
+        "source_items": [
+          { "label": "Water & Sewer", "value": 50000 },
+          { "label": "Electric - Common Areas", "value": 30000 }
+        ],
+        "user_adjusted": false
+      }
+    }
+  },
+  "rent_stack": [
+    {
+      "unit_type": "Studio",
+      "unit_count": 8,
+      "sq_ft": 450,
+      "current_rent": 1100,
+      "market_rent": 1250,
+      "projected_rent": 1200
+    },
+    {
+      "unit_type": "1BR",
+      "unit_count": 24,
+      "sq_ft": 650,
+      "current_rent": 1500,
+      "market_rent": 1700,
+      "projected_rent": 1650
+    },
+    {
+      "unit_type": "2BR",
+      "unit_count": 16,
+      "sq_ft": 900,
+      "current_rent": 1900,
+      "market_rent": 2100,
+      "projected_rent": 2050
+    }
+  ],
+  "documents": [
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "file_name": "rent-roll.pdf",
+      "document_type": "rent_roll",
+      "extraction_status": "completed"
+    },
+    {
+      "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "file_name": "operating-statement.xlsx",
+      "document_type": "operating_statement",
+      "extraction_status": "completed"
+    }
+  ],
+  "created_at": "2026-02-26T14:30:00Z"
+}
+```
+
+```json 400
+{
+  "error": 400,
+  "message": "No files provided in request"
+}
+```
+
+```json 401
+{
+  "error": 401,
+  "message": "Invalid or missing API key"
+}
+```
+</ResponseExample>

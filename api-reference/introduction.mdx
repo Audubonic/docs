@@ -1,0 +1,39 @@
+---
+title: Introduction
+description: Get started with the Milo API
+---
+
+## Base URL
+
+The Milo API is built on REST principles. All requests should be made to:
+
+```
+https://api.runmilo.ai/v1
+```
+
+## Authentication
+
+Authenticate your requests by including your API key in the `Authorization` header:
+
+```bash
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Response Format
+
+All responses are returned in JSON format:
+
+```json
+{
+  "success": true,
+  "data": { }
+}
+```
+
+## Rate Limits
+
+The API is rate limited to ensure fair usage. If you exceed the limit, you'll receive a `429 Too Many Requests` response.
+
+## Need Help?
+
+Reach out to [support@audubonic.com](mailto:support@audubonic.com) if you have any questions.

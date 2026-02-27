@@ -1,16 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "Milo API",
+    "description": "The Milo API allows you to extract structured data from CRE documents.",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.runmilo.ai/v1"
     }
   ],
   "security": [
@@ -19,134 +16,62 @@
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
+    "/extract": {
+      "post": {
+        "operationId": "extract",
+        "summary": "Extract structured data",
+        "description": "Upload all CRE documents, including  property info, financials, and rent stack data to receive structured extraction results.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": ["files"],
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "description": "One or more files to extract data from. Supported formats include PDF, XLSX, CSV, DOCX, and images (PNG, JPG).",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
                   }
                 }
               }
             }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
           }
         },
         "responses": {
           "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+            "description": "Extraction completed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
@@ -154,48 +79,248 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "ExtractionResult": {
         "type": "object",
+        "required": ["deal_id", "status"],
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "deal_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the deal"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "status": {
+            "type": "string",
+            "description": "Status of the extraction",
+            "enum": ["pending", "processing", "completed", "failed"]
+          },
+          "property": {
+            "$ref": "#/components/schemas/ExtractionPropertyInfo"
+          },
+          "financials": {
+            "$ref": "#/components/schemas/ExtractionFinancials"
+          },
+          "rent_stack": {
+            "type": "array",
+            "description": "Unit-level rent data",
+            "items": {
+              "$ref": "#/components/schemas/ExtractionRentStackItem"
+            }
+          },
+          "documents": {
+            "type": "array",
+            "description": "Metadata for each uploaded document",
+            "items": {
+              "$ref": "#/components/schemas/ExtractionDocumentInfo"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp of when the extraction was created",
+            "nullable": true
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "ExtractionPropertyInfo": {
+        "type": "object",
+        "description": "Extracted property details",
+        "properties": {
+          "property_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of the property"
           },
-          {
-            "required": [
-              "id"
-            ],
+          "property_address": {
+            "type": "string",
+            "nullable": true,
+            "description": "Street address of the property"
+          },
+          "purchase_price": {
+            "type": "number",
+            "nullable": true,
+            "description": "Purchase price of the property"
+          },
+          "year_built": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Year the property was built"
+          },
+          "units": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Total number of units"
+          }
+        }
+      },
+      "ExtractionFinancials": {
+        "type": "object",
+        "description": "Extracted financial data",
+        "properties": {
+          "gross_potential_rent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Gross potential rent"
+          },
+          "other_income": {
+            "type": "number",
+            "nullable": true,
+            "description": "Other income sources"
+          },
+          "vacancy_rate": {
+            "type": "number",
+            "nullable": true,
+            "description": "Vacancy rate as a decimal (e.g. 0.05 for 5%)"
+          },
+          "operating_expenses": {
+            "type": "number",
+            "nullable": true,
+            "description": "Total operating expenses"
+          },
+          "noi": {
+            "type": "number",
+            "nullable": true,
+            "description": "Net operating income"
+          },
+          "current_average_rent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Current average rent per unit"
+          },
+          "manual_proven_rent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Manual proven rent"
+          },
+          "extra_fields": {
             "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
+            "nullable": true,
+            "description": "Additional extracted fields not covered by the standard schema",
+            "additionalProperties": true
+          },
+          "mapped_income": {
+            "type": "object",
+            "nullable": true,
+            "description": "Income line items mapped to standardized categories. Each key is a category slug (e.g. gross_potential_rent, vacancy_loss, bad_debt).",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MappedCategoryItem"
+            }
+          },
+          "mapped_expenses": {
+            "type": "object",
+            "nullable": true,
+            "description": "Expense line items mapped to standardized categories. Each key is a category slug (e.g. repairs_maintenance, ins_property, tax_real_property).",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MappedCategoryItem"
             }
           }
-        ]
+        }
+      },
+      "MappedCategoryItem": {
+        "type": "object",
+        "description": "A mapped category with its aggregated value and source line items",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Aggregated value for this category, summed from all source items"
+          },
+          "category_display": {
+            "type": "string",
+            "description": "Human-readable display name for this category, typically matching the primary source item label"
+          },
+          "source_items": {
+            "type": "array",
+            "description": "Original line items from the document that were mapped to this category",
+            "items": {
+              "$ref": "#/components/schemas/SourceItem"
+            }
+          },
+          "user_adjusted": {
+            "type": "boolean",
+            "description": "Whether the value has been manually adjusted by a user"
+          }
+        }
+      },
+      "SourceItem": {
+        "type": "object",
+        "description": "An individual line item extracted from the source document",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Original label as it appears in the source document"
+          },
+          "value": {
+            "type": "number",
+            "description": "Dollar amount for this line item"
+          }
+        }
+      },
+      "ExtractionRentStackItem": {
+        "type": "object",
+        "description": "A single row in the rent stack",
+        "properties": {
+          "unit_type": {
+            "type": "string",
+            "nullable": true,
+            "description": "Unit type (e.g. 1BR, 2BR, Studio)"
+          },
+          "unit_count": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Number of units of this type"
+          },
+          "sq_ft": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Square footage per unit"
+          },
+          "current_rent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Current monthly rent"
+          },
+          "market_rent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Market rent"
+          },
+          "projected_rent": {
+            "type": "number",
+            "nullable": true,
+            "description": "Projected rent after renovation or lease-up"
+          }
+        }
+      },
+      "ExtractionDocumentInfo": {
+        "type": "object",
+        "description": "Metadata about an uploaded document",
+        "required": ["id"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique document identifier"
+          },
+          "file_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Original file name"
+          },
+          "document_type": {
+            "type": "string",
+            "nullable": true,
+            "description": "Detected document type (e.g. rent_roll, operating_statement, offering_memorandum)"
+          },
+          "extraction_status": {
+            "type": "string",
+            "nullable": true,
+            "description": "Extraction status for this document",
+            "enum": ["pending", "processing", "completed", "failed"]
+          }
+        }
       },
       "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
         "type": "object",
+        "required": ["error", "message"],
         "properties": {
           "error": {
             "type": "integer",
