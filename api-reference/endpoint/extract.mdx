@@ -3,6 +3,37 @@ title: Extract
 openapi: POST /extract
 ---
 
+Upload one or more CRE documents (rent rolls, T12s, operating statements, offering memorandums) and receive structured extraction results. Supported formats include PDF, XLSX, XLS, and CSV files.
+
+The response contains four top-level sections:
+
+- **`property`** — Extracted property details such as name, address, purchase price, year built, and unit count.
+- **`financials`** — Income and expense line items extracted from operating statements and T12s.
+- **`rent_stack`** — Unit-level rent data parsed from rent rolls, broken down by unit type.
+- **`documents`** — Metadata for each uploaded file, including its detected type and extraction status.
+
+## Response structure
+
+### Financials
+
+The `financials` object contains `mapped_income` and `mapped_expenses`, each returned as a flat array of `FinancialNode` objects. Every node represents a single line item from the source document:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | integer | Row index from the source document |
+| `field` | string | Standardized category slug (e.g. `gross_potential_rent`, `tax_real_property`) |
+| `display_name` | string | Original label as it appears in the document |
+| `value` | string | Dollar amount as a string (e.g. `"864000.00"`) |
+| `citation` | string | Source reference (e.g. `"row:5"`) |
+| `user_adjusted` | boolean | Whether this value has been manually adjusted |
+| `source_items` | integer[] | IDs of child line items that roll up into this node |
+
+Subtotal rows use `source_items` to reference their children. For example, a "Utilities" node with `"source_items": [11, 12]` is the sum of the nodes with `id` 11 and 12 (e.g. "Water & Sewer" and "Electric - Common Areas"). Leaf nodes have an empty `source_items` array.
+
+### Rent stack
+
+Each item in the `rent_stack` array represents one unit type with its count, square footage, and rent figures (current, market, and projected).
+
 <RequestExample>
 ```bash cURL
 curl -X POST https://api.runmilo.ai/v1/extract \
@@ -54,84 +85,121 @@ const data = await response.json();
     "units": 48
   },
   "financials": {
-    "gross_potential_rent": 864000,
-    "other_income": 24000,
     "vacancy_rate": 0.05,
-    "operating_expenses": 328320,
-    "noi": 492480,
     "current_average_rent": 1500,
     "manual_proven_rent": null,
-    "extra_fields": null,
-    "mapped_income": {
-      "gross_potential_rent": {
-        "value": 864000,
-        "category_display": "Gross Potential Rent",
-        "source_items": [
-          { "label": "Gross Potential Rent", "value": 864000 }
-        ],
-        "user_adjusted": false
+    "mapped_income": [
+      {
+        "id": 1,
+        "field": "gross_potential_rent",
+        "display_name": "Gross Potential Rent",
+        "value": "864000.00",
+        "citation": "row:1",
+        "user_adjusted": false,
+        "source_items": []
       },
-      "other_income": {
-        "value": 24000,
-        "category_display": "Other Income",
-        "source_items": [
-          { "label": "Laundry", "value": 12000 },
-          { "label": "Parking", "value": 12000 }
-        ],
-        "user_adjusted": false
+      {
+        "id": 2,
+        "field": "other_income",
+        "display_name": "Other Income",
+        "value": "24000.00",
+        "citation": "row:2",
+        "user_adjusted": false,
+        "source_items": [3, 4]
       },
-      "vacancy_loss": {
-        "value": -43200,
-        "category_display": "Vacancy Loss",
-        "source_items": [
-          { "label": "Vacancy Loss (5%)", "value": -43200 }
-        ],
-        "user_adjusted": false
+      {
+        "id": 3,
+        "field": "other_income",
+        "display_name": "Laundry",
+        "value": "12000.00",
+        "citation": "row:3",
+        "user_adjusted": false,
+        "source_items": []
+      },
+      {
+        "id": 4,
+        "field": "other_income",
+        "display_name": "Parking",
+        "value": "12000.00",
+        "citation": "row:4",
+        "user_adjusted": false,
+        "source_items": []
+      },
+      {
+        "id": 5,
+        "field": "vacancy_loss",
+        "display_name": "Vacancy Loss (5%)",
+        "value": "-43200.00",
+        "citation": "row:5",
+        "user_adjusted": false,
+        "source_items": []
       }
-    },
-    "mapped_expenses": {
-      "tax_real_property": {
-        "value": 97000,
-        "category_display": "Property Tax",
-        "source_items": [
-          { "label": "Property Tax", "value": 97000 }
-        ],
-        "user_adjusted": false
+    ],
+    "mapped_expenses": [
+      {
+        "id": 6,
+        "field": "tax_real_property",
+        "display_name": "Property Tax",
+        "value": "97000.00",
+        "citation": "row:6",
+        "user_adjusted": false,
+        "source_items": []
       },
-      "ins_property": {
-        "value": 48000,
-        "category_display": "Insurance",
-        "source_items": [
-          { "label": "Insurance", "value": 48000 }
-        ],
-        "user_adjusted": false
+      {
+        "id": 7,
+        "field": "ins_property",
+        "display_name": "Insurance",
+        "value": "48000.00",
+        "citation": "row:7",
+        "user_adjusted": false,
+        "source_items": []
       },
-      "repairs_maintenance": {
-        "value": 62000,
-        "category_display": "Repairs & Maintenance",
-        "source_items": [
-          { "label": "Repairs & Maintenance", "value": 62000 }
-        ],
-        "user_adjusted": false
+      {
+        "id": 8,
+        "field": "repairs_maintenance",
+        "display_name": "Repairs & Maintenance",
+        "value": "62000.00",
+        "citation": "row:8",
+        "user_adjusted": false,
+        "source_items": []
       },
-      "property_management_fees": {
-        "value": 41320,
-        "category_display": "Management Fee",
-        "source_items": [
-          { "label": "Management Fee", "value": 41320 }
-        ],
-        "user_adjusted": false
+      {
+        "id": 9,
+        "field": "property_management_fees",
+        "display_name": "Management Fee",
+        "value": "41320.00",
+        "citation": "row:9",
+        "user_adjusted": false,
+        "source_items": []
       },
-      "util_water_sewer": {
-        "value": 80000,
-        "category_display": "Utilities",
-        "source_items": [
-          { "label": "Water & Sewer", "value": 50000 },
-          { "label": "Electric - Common Areas", "value": 30000 }
-        ],
-        "user_adjusted": false
+      {
+        "id": 10,
+        "field": "util_water_sewer",
+        "display_name": "Utilities",
+        "value": "80000.00",
+        "citation": "row:10",
+        "user_adjusted": false,
+        "source_items": [11, 12]
+      },
+      {
+        "id": 11,
+        "field": "util_water_sewer",
+        "display_name": "Water & Sewer",
+        "value": "50000.00",
+        "citation": "row:11",
+        "user_adjusted": false,
+        "source_items": []
+      },
+      {
+        "id": 12,
+        "field": "util_water_sewer",
+        "display_name": "Electric - Common Areas",
+        "value": "30000.00",
+        "citation": "row:12",
+        "user_adjusted": false,
+        "source_items": []
       }
-    }
+    ]
   },
   "rent_stack": [
     {
