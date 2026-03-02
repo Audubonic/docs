@@ -156,30 +156,10 @@
         "type": "object",
         "description": "Extracted financial data",
         "properties": {
-          "gross_potential_rent": {
-            "type": "number",
-            "nullable": true,
-            "description": "Gross potential rent"
-          },
-          "other_income": {
-            "type": "number",
-            "nullable": true,
-            "description": "Other income sources"
-          },
           "vacancy_rate": {
             "type": "number",
             "nullable": true,
             "description": "Vacancy rate as a decimal (e.g. 0.05 for 5%)"
-          },
-          "operating_expenses": {
-            "type": "number",
-            "nullable": true,
-            "description": "Total operating expenses"
-          },
-          "noi": {
-            "type": "number",
-            "nullable": true,
-            "description": "Net operating income"
           },
           "current_average_rent": {
             "type": "number",
@@ -191,66 +171,58 @@
             "nullable": true,
             "description": "Manual proven rent"
           },
-          "extra_fields": {
-            "type": "object",
-            "nullable": true,
-            "description": "Additional extracted fields not covered by the standard schema",
-            "additionalProperties": true
-          },
           "mapped_income": {
-            "type": "object",
+            "type": "array",
             "nullable": true,
-            "description": "Income line items mapped to standardized categories. Each key is a category slug (e.g. gross_potential_rent, vacancy_loss, bad_debt).",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MappedCategoryItem"
+            "description": "Income line items extracted from the T12",
+            "items": {
+              "$ref": "#/components/schemas/FinancialNode"
             }
           },
           "mapped_expenses": {
-            "type": "object",
+            "type": "array",
             "nullable": true,
-            "description": "Expense line items mapped to standardized categories. Each key is a category slug (e.g. repairs_maintenance, ins_property, tax_real_property).",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/MappedCategoryItem"
+            "description": "Expense line items extracted from the T12",
+            "items": {
+              "$ref": "#/components/schemas/FinancialNode"
             }
           }
         }
       },
-      "MappedCategoryItem": {
+      "FinancialNode": {
         "type": "object",
-        "description": "A mapped category with its aggregated value and source line items",
+        "description": "A single financial line item extracted from the T12",
         "properties": {
-          "value": {
-            "type": "number",
-            "description": "Aggregated value for this category, summed from all source items"
+          "id": {
+            "type": "integer",
+            "description": "Row index from the source document"
           },
-          "category_display": {
+          "field": {
             "type": "string",
-            "description": "Human-readable display name for this category, typically matching the primary source item label"
+            "description": "Category slug (e.g. 'gross_potential_rent', 'operating_expense')"
           },
-          "source_items": {
-            "type": "array",
-            "description": "Original line items from the document that were mapped to this category",
-            "items": {
-              "$ref": "#/components/schemas/SourceItem"
-            }
+          "display_name": {
+            "type": "string",
+            "description": "Original label from the source document"
+          },
+          "value": {
+            "type": "string",
+            "description": "Dollar amount as a string (e.g. '864000.00')"
+          },
+          "citation": {
+            "type": "string",
+            "description": "Source reference (e.g. 'row:5')"
           },
           "user_adjusted": {
             "type": "boolean",
-            "description": "Whether the value has been manually adjusted by a user"
-          }
-        }
-      },
-      "SourceItem": {
-        "type": "object",
-        "description": "An individual line item extracted from the source document",
-        "properties": {
-          "label": {
-            "type": "string",
-            "description": "Original label as it appears in the source document"
+            "description": "Whether this value has been manually adjusted"
           },
-          "value": {
-            "type": "number",
-            "description": "Dollar amount for this line item"
+          "source_items": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Row indices of child line items (for subtotal rows)"
           }
         }
       },
